@@ -4,13 +4,11 @@ $(function() {
   const $students = $(".student-item");
   const $search = $(".student-search");
 
-  let $activePage = 1;
-
   // Add search box to the html file
   $search.html("<input placeholder='Search for students...'>"
   + "<button>Search</button>");
 
-  // Event handler for clicking on "search"
+  // Event handler for clicking on the "search"-button
   $search.on('click', 'button', function() {
     searchList();
   });
@@ -39,6 +37,12 @@ $(function() {
     // Select the page-number class
     let $pages = $(".pagination");
 
+    // If only 1 page: leave the pagination class empty
+    if ($totPages === 1) {
+      $pages.html("");
+      return;
+    }
+
     // HTML string to be added
     let $pageList = "";
 
@@ -51,27 +55,18 @@ $(function() {
     // .. and add it to the html file
     $pages.html("<ul>" + $pageList + "</ul>");
 
-    // Add the new active page
-    $("li", $pages)[$activePage].addClass("active");
-
     // Event handler when button/anchor-element is clicked
     $($pages).on("click", "a", function(e) {
 
       // Prevent default action from triggering
       e.preventDefault();
 
-      // Removes the current active class
-      $("li", $pages)[$activePage].removeClass("active");
-
-      // change active page
-      $activePage = e.target.innerHTML;
-
       // Shows the page that is clicked
-      showPage($activePage, $students);
+      showPage(e.target.innerHTML, $students);
     });
-
   }
 
+  // Take an input and see if it is part of a student name in the list
   function searchList() {
     // Hide previously shown students
     $students.hide();
@@ -79,27 +74,31 @@ $(function() {
     // Store the input as lower case to compare with the student names
     let $input = $("input", $search).val().toLowerCase();
 
-    // Array containing matched students
+    // Filter through the student emails
+    // Returns the students that matches the input
     let $matched = $students.filter(function() {
       return $(".email", this).text().indexOf($input) >= 0;
     });
 
-    /* for (let i = 0; i < $students.length; i++) {
-        if ($(".email")[i].innerHTML.indexOf($input) >= 0) {
-          $matched.push($students[i]);
-        }
-      } */
+    // If no matches: Print message in the no-matches class
     if ($matched.length === 0) {
-      $(".no-matches").html("<p>No students matched your search..</p>");
+      $(".no-matches").html("<p>No student matched your search..</p>");
     }
+    // Leave the no-matches class empty if there has been a match
     else {
       $(".no-matches").html("");
     }
 
+    // Print the new first page with the matching students
     showPage(1, $matched);
+
+    // Prints new page links
     appendPageLinks($matched);
   }
 
+  // Prints the initial page and student list
   showPage(1, $students);
+
+  // Prints the initial page links
   appendPageLinks($students);
 });
