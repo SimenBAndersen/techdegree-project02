@@ -24,7 +24,6 @@ $(function() {
 
     // Select and show 10 students, starting from $studentIndex
     studentList.slice($studentIndex, $studentIndex + 10).show();
-
   }
 
   // Create page links
@@ -48,18 +47,27 @@ $(function() {
 
     // Loop through and add all the pages to the $pageList HTML-string
     for (let i = 1; i <= $totPages; i++) {
-      $pageList += "<li><a>" + i + "</a></li>";
+      $pageList += "<li><a>" + i + "</a></li>"
     }
 
     // Add a <ul> tar and the $pageList string together..
     // .. and add it to the html file
     $pages.html("<ul>" + $pageList + "</ul>");
 
+    // Add the active class to the first page
+    $('.pagination a:first').addClass('active');
+
     // Event handler when button/anchor-element is clicked
     $($pages).on("click", "a", function(e) {
 
       // Prevent default action from triggering
       e.preventDefault();
+
+      // Remove previously active pages
+      $('.pagination a').removeClass('active');
+
+      // Add new active page
+      $(this).addClass('active');
 
       // Shows the page that is clicked
       showPage(e.target.innerHTML, $students);
