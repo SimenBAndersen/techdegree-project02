@@ -1,5 +1,6 @@
 // On load function
 $(function() {
+  
   // Selectors
   const $students = $(".student-item");
   const $search = $(".student-search");
@@ -27,7 +28,6 @@ $(function() {
   }
 
   // Create page links
-  // Call showPage() to display list of students
   function appendPageLinks(studentList) {
 
     // Total number of pages to be shown
@@ -42,7 +42,7 @@ $(function() {
       return;
     }
 
-    // HTML string to be added
+    // HTML string to be added later
     let $pageList = "";
 
     // Loop through and add all the pages to the $pageList HTML-string
@@ -50,7 +50,7 @@ $(function() {
       $pageList += "<li><a>" + i + "</a></li>"
     }
 
-    // Add a <ul> tar and the $pageList string together..
+    // Combine a <ul> tag and the $pageList string..
     // .. and add it to the html file
     $pages.html("<ul>" + $pageList + "</ul>");
 
@@ -76,6 +76,7 @@ $(function() {
 
   // Take an input and see if it is part of a student name in the list
   function searchList() {
+
     // Hide previously shown students
     $students.hide();
 
@@ -83,7 +84,7 @@ $(function() {
     let $input = $("input", $search).val().toLowerCase();
 
     // Filter through the student emails
-    // Returns the students that matches the input
+    // Return the students that matches the input
     let $matched = $students.filter(function() {
       return $(".email", this).text().indexOf($input) >= 0;
     });
