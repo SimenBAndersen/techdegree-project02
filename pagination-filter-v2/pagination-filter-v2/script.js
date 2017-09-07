@@ -1,6 +1,6 @@
 // On load function
 $(function() {
-  
+
   // Selectors
   const $students = $(".student-item");
   const $search = $(".student-search");
