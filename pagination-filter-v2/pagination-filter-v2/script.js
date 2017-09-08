@@ -83,6 +83,10 @@ $(function() {
     // Store the input as lower case to compare with the student names
     let $input = $("input", $search).val().toLowerCase();
 
+    // remove whitespaces with a dot to compare with the email format
+    // no need to compare with name
+    $input = $input.replace(/ /g,'.');
+
     // Filter through the student emails
     // Return the students that matches the input
     let $matched = $students.filter(function() {
