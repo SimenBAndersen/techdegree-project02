@@ -3,6 +3,9 @@ Pagination and Content Filter
 
 This is the second of in total 12 projects that I will be doing through Treehouse's Fullstack Javascript Techdegree. 
 
+Technology used:
+- JQuery
+
 In this project:
 - Started out as a webpage showing a long list of 54 students, all on the same page. 
 - My task was initially to divide the students into groups of 10 and show each group on a seperate page. 
