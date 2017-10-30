@@ -4,7 +4,7 @@ Pagination and Content Filter
 This is the second of in total 12 projects that I will be doing through Treehouse's Fullstack Javascript Techdegree. 
 
 Technology used:
-- JQuery
+- jQuery
 
 In this project:
 - Started out as a webpage showing a long list of 54 students, all on the same page. 
